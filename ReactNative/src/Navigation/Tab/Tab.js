@@ -21,4 +21,4 @@ function Tab (){
     )
 }
 
-export default HomeMenu
+export default Tab
