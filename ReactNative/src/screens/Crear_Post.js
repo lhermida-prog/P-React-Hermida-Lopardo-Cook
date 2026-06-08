@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View , Pressable , useState , StyleSheet} from 'react-native'
+import React, { Component , useState} from 'react'
+import { Text, View , Pressable  , StyleSheet} from 'react-native'
 import { auth, db } from '../FireBase/Config'
 
 
