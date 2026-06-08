@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
-import { auth } from "../Firebase/config";
+import { auth } from "../FireBase/Config";
 
 
 function Login(props) {
@@ -13,9 +13,9 @@ function Login(props) {
                 alert("Contraseña invalida")
             )
         }
-        if (!auth.signInWithEmailAndPassword(email, contrasena) ){
+        if (!auth.signInWithEmailAndPassword(email, contrasena)) {
             return (
-                alert ("Las credenciales no son iguales")
+                alert("Las credenciales no son iguales")
             )
         }
 
@@ -37,49 +37,66 @@ function Login(props) {
     return (
         <View style={styles.container}>
 
-            <Text>Iniciar sesion</Text>
-            <TextInput placeholder='Email...' keyboardType='email-address' value={email} onChangeText={text => setEmail(text)} style={styles.Campos} />
-            <TextInput placeholder='Password...' secureTextEntry={true} value={contrasena} onChangeText={text => setContrasena(text)} style={styles.Campos} />
+            <Text style={styles.titulo}>Iniciar sesión</Text>
 
-            <Pressable onPress={() => Submit()} style={styles.Boton}><Text style={styles.boton2}>Iniciar Sesion</Text></Pressable>
-            <Pressable onPress={() => props.navigation.navigate("Register")} style={styles.Boton}><Text style={styles.boton2}>No tengo cuenta</Text></Pressable>
+            <TextInput placeholder="Email..." style={styles.Campos} value={email} onChangeText={setEmail}/>
+
+            <TextInput placeholder="Password..." style={styles.Campos} secureTextEntry={true} value={contrasena} onChangeText={setContrasena} />
+
+            <Pressable style={styles.Boton} onPress={() => Submit()}>
+                <Text style={styles.textoBoton} >Iniciar Sesion</Text>
+            </Pressable>
+
+            <Pressable onPress={() => props.navigation.navigate("Register")}   style={styles.Boton}>
+                <Text style={styles.textoBoton}>No tengo cuenta</Text>
+            </Pressable>
 
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
-        padding: 10,
-        backgroundColor : "#d01b1b3f"
+        marginTop: 40,
+        padding: 20,
+        backgroundColor: "#f3d6d6",
+        flex: 1,
     },
+
+    titulo: {
+        fontSize: 22,
+        marginBottom: 20,
+        textAlign: "center",
+        color: "#4a2c2c",
+    },
+
     Campos: {
-        height: 20,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
+        height: 45,
+        paddingHorizontal: 12,
         borderWidth: 1,
         borderColor: "#854848",
         borderStyle: "solid",
-        borderRadius: 6,
-        marginVertical: 10
+        borderRadius: 8,
+        marginVertical: 10,
+        backgroundColor: "#fff4f4",
     },
+
     Boton: {
         backgroundColor: "#c78873",
+        paddingVertical: 12,
         paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: "center",
-        borderRadius: 4,
+        borderRadius: 8,
         borderWidth: 1,
-        borderStyle: "solid",
-        borderColor: "#bd540e"
-
-
+        borderColor: "#9b5f4f",
+        marginTop: 12,
     },
-    boton2: {
-        color: "#fff"
-    }
 
-})
+    textoBoton: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 16,
+    },
+
+});
 export default Login
 
 

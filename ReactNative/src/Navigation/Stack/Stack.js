@@ -6,17 +6,18 @@ import Tab from '../Tab/Tab';
 
 const Stack = createNativeStackNavigator();
 
-function Stack (){
+function Stacks (){
 
     return(
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Register" component={ Register } options={ { headerShown: false } }/>
                 <Stack.Screen name="Login" component ={ Login } options={ { headerShown: false } }/>
-                <Stack.Screen name="Tabs" component ={ Tab } options={ { headerShown: false } }/>
+                <Stack.Screen name="Tab" component ={ Tab } options={ { headerShown: false } }/>
+
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
 
-export default Stack 
+export default Stacks 

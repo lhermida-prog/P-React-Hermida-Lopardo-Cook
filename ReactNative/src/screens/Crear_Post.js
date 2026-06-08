@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View , Pressable , useState , StyleSheet} from 'react-native'
-import { db, auth } from '../firebase/config'
+import { auth, db } from '../FireBase/Config'
+
 
 
 function Crear_Post (){
