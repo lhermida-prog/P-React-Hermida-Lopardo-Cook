@@ -7,8 +7,9 @@ function Crear_Post (){
     const [comentario , setComentario] = useState("")
     function Submit (){
         db.collection("Post").add({
-            owner: auth.currentUser.email,
+            owner : auth.currentUser.email,
             description: comentario ,
+            likes : [] ,
             createdAt: Date.now ()
         })
         .then()

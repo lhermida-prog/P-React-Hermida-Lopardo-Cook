@@ -1,5 +1,4 @@
-import Stack from "../../../Clase3Navegacion/demo-expo/src/Navigation/Stack/Stack"
-
+import Stack from "./src/Navigation/Stack/Stack"
 function App (){
   return(
     <Stack/>
