@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Text, View , Pressable , useState , StyleSheet} from 'react-native'
+import React, { Component , useState } from 'react'
+
+import { Text, View, Pressable, StyleSheet, TextInput } from 'react-native'
 import { auth, db } from '../FireBase/Config'
 
 
@@ -18,24 +19,24 @@ function Crear_Post (props){
             owner : auth.currentUser.email,
             description: comentario ,
             likes : [] ,
-            createdAt: Date.now ()
-        
+            createdAt: Date.now()
+        })
         .then(res => console.log(res)
             
         )
         .catch (e => console.log (e))
-        })
+        
 
         props.navigation.navigate("Profile")
     }
 
     return (
-      <View style = {styles.container} >
+        <View style = {styles.container} >
           
           <Text style = {styles.titulo}>Crear nuevo post</Text>
           <TextInput placeholder='Escriba aqui su comentario...' style = {styles.Campos} value={comentario} onChangeText={ text => setComentario (text)}/>
           <Pressable onPress={()=> Submit()} style = {styles.boton} ><Text style = {styles.boton2}>Publicar post</Text></Pressable>
-    </View>
+        </View>
     )
   }
 

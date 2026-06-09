@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { db , auth } from "../FireBase/Config"
 
 
-function Home() {
+function Home(props) {
     
     const [posteos, setPosteos] = useState([])
     const [loading, setLoading] = useState("")
@@ -16,14 +16,14 @@ function Home() {
                     id: doc.id,
                     data: doc.data()
                 })
-                setPosteos(posts)
+                setPosteos(posteos)
                 setLoading(false)
             })
         }
     ), [])
 
     function Comentar(){
-        navigation.navigate("Crear_Post")
+        props.navigation.navigate("Crear_Post")
     }
 
     return (
@@ -37,7 +37,7 @@ function Home() {
                     <Text>{item.data.owner}</Text>
                     <Text>{item.data.description}</Text>
                     <Text>{item.data.likes}</Text>
-                    <Pressable onPress={}>Me gusta</Pressable>
+                    <Pressable onPress={()=> Comentar()}>Me gusta</Pressable>
                 </View>
             )}/>
             <Pressable onPress={() => Comentar()}>Comentar</Pressable>
