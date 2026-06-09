@@ -2,6 +2,7 @@ import { View, Text, FlatList, Pressable } from "react-native";
 import { useState, useEffect } from "react";
 import { db , auth } from "../FireBase/Config"
 
+
 function Home() {
     
     const [posteos, setPosteos] = useState([])

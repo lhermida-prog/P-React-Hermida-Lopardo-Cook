@@ -31,6 +31,7 @@ function Profile (props) {
     return (
       <View>
         <Text> Tu perfil </Text>
+        <Text>{nombre_usuario}</Text>
         <Pressable onPress={() => logout()} ><Text >Cerrar Sesion</Text></Pressable>
       </View>
     )
