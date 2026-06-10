@@ -18,7 +18,7 @@ function Crear_Post (props){
         db.collection("Post").add({
             owner : auth.currentUser.email,
             description: comentario ,
-            likes : [] ,
+            likes : 0 ,
             createdAt: Date.now()
         })
         .then(res => console.log(res)
@@ -27,7 +27,7 @@ function Crear_Post (props){
         .catch (e => console.log (e))
         
 
-        props.navigation.navigate("Profile")
+        props.navigation.navigate("Home")
     }
 
     return (
