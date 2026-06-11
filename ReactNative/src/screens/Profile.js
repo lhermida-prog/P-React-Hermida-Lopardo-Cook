@@ -6,32 +6,36 @@ import { Pressable } from 'react-native'
 function Profile (props) {
    const [nombre_usuario , setNombreUsuario] =   useState ([])
    const [nombre_email , setNombreEmail] = useState ([])
+   const [publicaciones , setPublicaciones] = useState ([])
 
    function logout(){
     auth.signOut()
     props.navigation.navigate("Login")
    }
 
-  useEffect (()=> { db.collection ("users").onSnapshot(
+  useEffect (() => { db.collection ("users").where("owner", "==", auth.currentUser.email).onSnapshot(
           docs => {
               let usuarioss = []
               docs.forEach (doc => {
                   usuarioss.push({
                       id : doc.id ,
-                      data : doc.data ()
+                      data : doc.data()
   
                   })
-                  setNombreUsuario (usuarioss)
+                  setNombreUsuario(usuarioss.data.username)
+                  setNombreEmail(usuarioss.data.email)
+                  
                   
   
               })
           } ,
           
       )},[] )
+      
     return (
       <View>
         <Text> Tu perfil </Text>
-        <Text>{nombre_usuario.username}</Text>
+        <Text>Usuario: {nombre_usuario}</Text>
         <Pressable onPress={() => logout()}><Text >Cerrar Sesion</Text></Pressable>
       </View>
     )
