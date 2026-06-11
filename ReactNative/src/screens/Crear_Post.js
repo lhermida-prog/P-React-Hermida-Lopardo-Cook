@@ -18,7 +18,7 @@ function Crear_Post (props){
         db.collection("Post").add({
             owner : auth.currentUser.email,
             description: comentario ,
-            likes : 0 ,
+            likes : [] ,
             createdAt: Date.now()
         })
         .then(res => console.log(res)

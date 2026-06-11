@@ -24,14 +24,13 @@ function Register(props) {
 
         console.log("Usuario creado:", email);
 
-
+        auth.signOut()
         props.navigation.navigate('Login');
+        
 
       })
       .catch((error) => {
         console.log(error);
-
-
         alert("Error de registro");
       });
   }
