@@ -38,7 +38,7 @@ function Home(props) {
             data={posteos}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-                <Post datos={item} />
+                <Post datos={item} navigation={props.navigation} />
             )}
         />)
             
