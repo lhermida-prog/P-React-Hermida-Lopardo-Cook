@@ -6,7 +6,8 @@ import { auth } from "../FireBase/Config";
 function Login(props) {
     const [email, setEmail] = useState("");
     const [contrasena, setContrasena] = useState("");
-useEffect(() =>{
+
+    useEffect(() =>{
 auth.onAuthStateChanged((user)=>{
 if (user){
     console.log("Usuario logueado",user.email);
