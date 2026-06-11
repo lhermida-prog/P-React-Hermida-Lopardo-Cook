@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import { auth } from "../FireBase/Config";
 
@@ -6,7 +6,15 @@ import { auth } from "../FireBase/Config";
 function Login(props) {
     const [email, setEmail] = useState("");
     const [contrasena, setContrasena] = useState("");
-
+useEffect(() =>{
+auth.onAuthStateChanged((user)=>{
+if (user){
+    console.log("Usuario logueado",user.email);
+    props.navigation.navigate("Tab");
+}
+}
+)
+})
     function Submit() {
         if (contrasena.length < 6) {
             return (
