@@ -16,10 +16,10 @@ const Tab = createBottomTabNavigator();
 function Tabs (){
     return(
         
-        <Tab.Navigator screenOptions={ { tabBarShowLabel: false } }>
-            <Tab.Screen name="StackHome" component = {StackHome} options={ { tabBarIcon: () => <Entypo name="home" size={24} color="black"/> }} />
+        <Tab.Navigator screenOptions={ { tabBarShowLabel: false } } screenOptions={{ headerShown: false }}>
+            <Tab.Screen name="Home" component = {StackHome} options={ { tabBarIcon: () => <Entypo name="home" size={24} color="black"/> }} />
             <Tab.Screen name = "Profile" component={Profile} options={ { tabBarIcon: () => <MaterialCommunityIcons name="face-man-profile" size={24} color="black" />} }/>
-            <Tab.Screen name = "Crear_Post" component={Crear_Post} options={ { tabBarIcon: () =><AntDesign name="camera" size={24} color="black" />}}/>
+            <Tab.Screen name = "Crear Post" component={Crear_Post} options={ { tabBarIcon: () =><AntDesign name="camera" size={24} color="black" />}}/>
 
         </Tab.Navigator>
         
