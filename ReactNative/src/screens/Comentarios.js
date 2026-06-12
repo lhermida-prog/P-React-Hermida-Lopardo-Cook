@@ -6,11 +6,11 @@ function Comentarios(props){
     const [comentario,setcomentario] = useState('');
     const [comentarios,setcomentarios] = useState('');
 
-
+const {id} = props.route.params
 
     function agregarComentario(){
-        db.collection('comentarios').add({
-            idPost: idpost,
+        db.collection('comentaris').add({
+            idPost: id,
             comentario: comentario,
             email: auth.currentUser.email,
             createdAt: Date.now()
@@ -25,7 +25,7 @@ function Comentarios(props){
 }
 
 useEffect(() =>{
-    db.collection('comentarios').where("idPost","==","").onSnapshot(
+    db.collection('comentarios').where("idPost","==","id").onSnapshot(
         docs =>{
             let listacomentarios = [];
             docs.foreach(doc =>
@@ -38,13 +38,22 @@ useEffect(() =>{
         })})
     
         return(
-              <View>
-
+<View>
+<FlatList
+    data={comentarios}
+    keyExtractor={(item) => item.id}
+    renderItem={({ item }) => (
+        <View>
+            <Text>{item.email}</Text>
+            <Text>{item.comentario}</Text>
+        </View>
+    )}
+/>
        
    </View>
         );
     }
-
+export default Comentarios;
         
 
 
