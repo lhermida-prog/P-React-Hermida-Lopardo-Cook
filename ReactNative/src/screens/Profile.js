@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Text, View, Pressable, FlatList } from 'react-native'
 import { auth, db } from '../FireBase/Config'
-import { Pressable } from 'react-native'
 import Post from '../components/Post'
 
 function Profile(props) {
@@ -32,8 +31,7 @@ function Profile(props) {
       },
 
     )
-  }, [])
-  db.collection("Post").where("owner" , "==" , auth.currentUser.owner).onSnapshot(
+     db.collection("Post").where("owner" , "==" , auth.currentUser.email).onSnapshot(
     docs => {
       let posts = []
       docs.forEach( doc => {
@@ -41,10 +39,12 @@ function Profile(props) {
           id: doc.id,
           data: doc.data()
         })
+        setPublicaciones(posts)
         console.log(posts);
       })
     }
   )
+  }, [])
 
   return (
     <View>
@@ -52,6 +52,14 @@ function Profile(props) {
       <Text> Usuario: {nombre_usuario}</Text>
       <Text> Email: {nombre_email}</Text>
       <Pressable onPress={() => logout()}><Text>Cerrar Sesion</Text></Pressable>
+
+      <Text>Mis Publicaciones</Text>
+
+      <FlatList 
+      data={publicaciones}
+      keyExtractor={(item) => item.id}
+      renderItem={({item}) => (<Post datos={item} navigation={props.navigation}/>)}
+      />
     </View>
   )
 }
