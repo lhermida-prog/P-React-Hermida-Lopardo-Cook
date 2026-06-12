@@ -1,12 +1,34 @@
 import { View, Text, FlatList, Pressable , StyleSheet} from "react-native";
 import { useState, useEffect } from "react";
 import { db , auth } from "../FireBase/Config"
+import firebase from "firebase";
 
 
 function Post(props) {
-
-
+const [mostrar,setmostrar] = useState(true)
     console.log(props);
+    
+    
+    function Likear (){
+        db.collection("Post")
+        .doc(props.datos.id)
+        .update({
+            likes : firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+        })  
+        setmostrar(false)
+        
+    }
+
+    function SacarLikea (){
+        db.collection("Post")
+        .doc(props.datos.id)
+        .update({
+            likes : firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+        })  
+        setmostrar (true)
+    }
+
+    
     
 
     return (
@@ -16,12 +38,13 @@ function Post(props) {
             <View style={styles.publicacion}>
                 <Text style={styles.owner}>{props.datos.data.owner}</Text>
                 <Text style={styles.description}>{props.datos.data.description}</Text>
-                <Text style={styles.likes}>Likes: {props.datos.data.likes}</Text>
-
-                <Pressable onPress={() => Likear(item)} style={styles.botonLike}>
-                    <Text style={styles.textoBoton}>Me gusta</Text>
-                </Pressable>
-                <Pressable onPress={() => Comentar()} style={styles.botonComentar}>
+                <Text style={styles.likes}>Likes: {props.datos.data.likes.length}</Text>
+                {mostrar ? (<Pressable onPress={() => Likear()} style={styles.botonLike}>
+                    <Text style={styles.textoBoton}>Like</Text>
+                </Pressable> ) : (<Pressable onPress={() => SacarLikea()} style={styles.botonLike}>
+                    <Text style={styles.textoBoton}>Quitar Like</Text>
+                </Pressable>) }
+                <Pressable onPress={() => props.navigation.navigate("Comentarios")} style={styles.botonComentar}>
                     <Text style={styles.textoBotonComentar}>Comentar</Text>
                 </Pressable>
             </View>
