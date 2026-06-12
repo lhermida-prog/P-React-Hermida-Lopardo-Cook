@@ -9,7 +9,7 @@ function Comentarios(props) {
     const { id } = props.route.params;
 
     function agregarComentario() {
-        db.collection("comentarios")
+        db.collection("Comentarios")
             .add({
                 idPost: id,
                 comentario: comentario,
@@ -24,22 +24,20 @@ function Comentarios(props) {
             });
     }
 
- 
-    useEffect(()=> {
-    db.collection("Comentarios").where("idPost" , "id").onSnapshot(
-        docs => {
-            let listacomentarios = [];
-            docs.forEach(doc => {
-                listacomentarios.push({
-                    id: doc.id,
-                    data: doc.data() , 
-                })
-                setcomentarios(listacomentarios)
-               
+ db.collection("Comentarios")
+    .where("idPost", "==", id)
+    .onSnapshot(docs => {
+        let listacomentarios = [];
 
-            })
-        })
-    },[])
+        docs.forEach(doc => {
+            listacomentarios.push({
+                id: doc.id,
+                data: doc.data(),
+            });
+        });
+
+        setcomentarios(listacomentarios);
+    });
 
     return (
         <View>
@@ -49,16 +47,16 @@ function Comentarios(props) {
                 <Text>Enviar comentario</Text>
             </Pressable>
 
-            <FlatList
-                data={comentarios}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.email}</Text>
-                        <Text>{item.comentario}</Text>
-                    </View>
-                )}
-            />
+          <FlatList
+    data={comentarios}
+    keyExtractor={(item) => item.id}
+    renderItem={({ item }) => (
+        <View>
+            <Text>{item.data.email}</Text>
+            <Text>{item.data.comentario}</Text>
+        </View>
+    )}
+/>
         </View>
     );
 }

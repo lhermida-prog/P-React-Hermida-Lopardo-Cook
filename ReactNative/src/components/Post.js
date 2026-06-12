@@ -44,7 +44,7 @@ const [mostrar,setmostrar] = useState(true)
                 </Pressable> ) : (<Pressable onPress={() => SacarLikea()} style={styles.botonLike}>
                     <Text style={styles.textoBoton}>Quitar Like</Text>
                 </Pressable>) }
-                <Pressable onPress={() => props.navigation.navigate("Comentarios")} style={styles.botonComentar}>
+                <Pressable onPress={() => props.navigation.navigate("Comentarios",{id: props.datos.id,})} style={styles.botonComentar}>
                     <Text style={styles.textoBotonComentar}>Comentar</Text>
                 </Pressable>
             </View>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Post
+export default Post;
 
 
 
